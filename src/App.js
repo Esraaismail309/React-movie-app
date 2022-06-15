@@ -1,11 +1,18 @@
-import logo from './logo.svg';
+import { Provider } from 'react-redux';
+import store from './redux/store'
 import './App.css';
+import Navbar from './components/shared/Navbar';
+import AllMovies from './layout/AllMovies';
+
 
 function App() {
+
+
   return (
-    <div className="App">
-      <h2>welcome</h2>
-    </div>
+    <Provider store={store}>
+      <Navbar />
+      <AllMovies />
+    </Provider>
   );
 }
 
