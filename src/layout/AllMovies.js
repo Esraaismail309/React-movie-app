@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import { fetchMoviesRequest } from "../redux/allMovies/AllMoviesActions";
 import Movie from "./Movie";
-
 function AllMovies() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchMoviesRequest());
   }, []);
+
   const movies = useSelector((res) => {
     return res.movies;
   });
@@ -19,7 +20,8 @@ function AllMovies() {
         {movies.isLoading ? (
           <Loader />
         ) : (
-          movies.movies.results.map((movie) => <Movie movie={movie} />)
+          movies.movies.results.map((movie) => (<Movie movie={movie} key={movie.id} />
+          ))
         )}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import fetchMovies, { axiosInstance } from "./MoviesApiCall";
+import { axiosInstance } from "./MoviesApiCall";
 
 import { put, call, takeLatest } from '@redux-saga/core/effects'
 import { fetchMoviesFail, fetchMoviesSuccess } from "./AllMoviesActions";
