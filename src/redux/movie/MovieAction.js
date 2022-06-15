@@ -1,5 +1,5 @@
 
-import { MOVIE_REQUEST, MOVIE_FAIL, MOVIE_SUCCESS } from './MovieType'
+import { MOVIE_REQUEST, MOVIE_FAIL, MOVIE_SUCCESS, MOVIE_CAST_REQUEST, MOVIE_CAST_SUCCESS } from './MovieType'
 
 export const fetchMovieRequest = (id) => {
     return {
@@ -17,5 +17,17 @@ export const fetchMovieFail = (error) => {
     return {
         type: MOVIE_FAIL,
         payload: error
+    }
+}
+export const fetchMovieCastRequest = (id) => {
+    return {
+        type: MOVIE_CAST_REQUEST,
+        payload: id
+    }
+}
+export const fetchMovieCastSuccess = (movieCast) => {
+    return {
+        type: MOVIE_CAST_SUCCESS,
+        payload: movieCast
     }
 }

@@ -9,7 +9,7 @@ function Rating({ rate }) {
             size={24}
             activeColor="#ffd700"
             edit={false}
-            classNames='justify-content-center'
+            classNames='justify-content-center '
         />
     )
 }
