@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
-import { Pagination } from "../components/shared/Pagination";
 import { fetchMoviesRequest } from "../redux/allMovies/AllMoviesActions";
 import Movie from "./movie/Movie";
-function AllMovies() {
+const AllMovies = () => {
   const dispatch = useDispatch();
-
+  const { page } = useParams()
   useEffect(() => {
-    dispatch(fetchMoviesRequest());
-  }, []);
-
+    dispatch(fetchMoviesRequest(page));
+  }, [page]);
   const movies = useSelector((res) => {
     return res.movies;
   });
@@ -25,7 +24,16 @@ function AllMovies() {
           <>
             {movies.movies.results.map((movie) => (
               <Movie movie={movie} key={movie.id} />))}
-            <Pagination />
+            <div className="d-flex justify-content-between fixed-bottom">
+              {page > 1 && (
+                <Link to={`/popularmovies/${+page - 1}`}>
+                  <button className="btn btn-dark border px-4 mx-auto mt-3  shadow border-dark rounded-pill "><FaArrowLeft /> Prev {+page - 1}</button>
+                </Link>)
+              }
+              <Link to={`/popularmovies/${+page + 1}`}>
+                <button className="btn btn-dark border px-4 mx-auto mt-3  shadow border-dark rounded-pill ">next {+page + 1} <FaArrowRight /></button>
+              </Link>
+            </div>
           </>
         )}
       </div>

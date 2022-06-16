@@ -1,10 +1,10 @@
 
 import { MOVIES_REQUEST, MOVIES_FAIL, MOVIES_SUCCESS } from './AllMoviesTypes'
 
-export const fetchMoviesRequest = () => {
+export const fetchMoviesRequest = (page) => {
     return {
         type: MOVIES_REQUEST,
-
+        payload: page
     }
 }
 export const fetchMoviesSuccess = (movies) => {

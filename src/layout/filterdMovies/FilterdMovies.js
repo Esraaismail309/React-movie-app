@@ -1,17 +1,20 @@
-import React from 'react'
-import { useSelector } from "react-redux";
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from "react-redux";
 import { SiFacepunch } from 'react-icons/si'
 import { FaLongArrowAltLeft } from "react-icons/fa";
-
+import { fetchFilterdMoviesRequest } from './../../redux/searchMovie/SearchActions'
 import Loader from '../../components/Loader';
 import Movie from '../movie/Movie';
-import { Link } from 'react-router-dom';
+import { Link, useParams, } from 'react-router-dom';
+import { Pagination } from '../../components/shared/Pagination';
 
 export const FilterdMovies = () => {
-
+    const { page, query } = useParams()
+    const dispatch = useDispatch()
     const data = useSelector((res) => { return res.filterdMovies })
-    // const arrLength = data?.filterdMovies?.results.length
-    // console.log(arrLength);
+    useEffect(() => {
+        dispatch(fetchFilterdMoviesRequest(page, query));
+    }, [page, query]);
     return (
         <div className='container mt-5 pt-5'>
             {data?.isLoading ? (<Loader />) :
@@ -31,8 +34,8 @@ export const FilterdMovies = () => {
                             <Movie movie={movie} key={movie.id} />
                         ))}
                     </div>)
-
             }
+            <Pagination page={page} query={query} />
         </div>
     )
 }

@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import Moviedetails from './layout/movieDetails/Moviedetails';
 import { Pagination } from './components/shared/Pagination';
 import { FilterdMovies } from './layout/filterdMovies/FilterdMovies';
+import { WishList } from './layout/WishList';
 
 function App() {
 
@@ -16,13 +17,15 @@ function App() {
       <Navbar />
       {/* <Pagination /> */}
       {/* <FilterdMovies /> */}
+
       <Routes>
         <Route path='/' element={<AllMovies />} />
-        <Route path='/popularmovies' element={<AllMovies />} />
+        <Route path='/popularmovies/:page' element={<AllMovies />} />
         <Route path='/moviedetails' element={<Moviedetails />} >
           <Route path=':id' element={<Moviedetails />} />
         </Route>
-        <Route path='/filterdmovie/:key' element={<FilterdMovies />} />
+        <Route path='/filterdmovie/:page/:query' element={<FilterdMovies />} />
+        <Route path='/wishlist' element={<WishList />} />
       </Routes>
     </Provider>
   );
