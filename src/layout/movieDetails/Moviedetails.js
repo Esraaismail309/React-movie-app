@@ -4,29 +4,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { RiRadioButtonFill } from "react-icons/ri";
 import { FaLink, FaLongArrowAltLeft, FaImdb } from "react-icons/fa";
 import { BsFillPlayFill } from "react-icons/bs";
-import { fetchMovieCastRequest, fetchMovieRequest } from "../redux/movie/MovieAction";
-import Loader from "../components/Loader";
-import Rating from "../components/shared/Rating";
+import {
+  fetchMovieCastRequest,
+  fetchMovieRequest,
+} from "../../redux/movie/MovieAction";
+import Loader from "../../components/Loader";
+import Rating from "../../components/shared/Rating";
+import { Cast } from "./Cast";
 
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/w780/";
 
-function Moviedetails() {
+const Moviedetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
-    // dispatch(fetchMovieCastRequest(id))
+    dispatch(fetchMovieCastRequest(id));
     dispatch(fetchMovieRequest(id));
   }, []);
-  // console.log(id);
 
   const movie = useSelector((res) => {
     return res.movie;
   });
-  console.log(movie);
   const movieCast = useSelector((res) => {
-    return res.movie;
+    return res.movie.movieCast;
   });
-  console.log(movieCast);
+
   return (
     <div className="container mt-5">
       <div className="row ">
@@ -35,7 +37,7 @@ function Moviedetails() {
         ) : (
           // movie.movie && (
           <>
-            <div className="col-md-5 text-center    ">
+            <div className="col-md-5 text-center">
               <img
                 src={BASE_IMG_URL + movie.movie.poster_path}
                 alt={movie.movie.title}
@@ -70,9 +72,14 @@ function Moviedetails() {
               <h5 className="mt-4">THE SYNOPSIS</h5>
               <p>{movie.movie.overview}</p>
               <h5>THE CAST</h5>
+              <div className="cast__item d-flex flex-wrap my-4">
+                {movieCast.cast.slice(0, 8).map((cast) => (
+                  <Cast cast={cast} key={cast.id} />
+                ))}
+              </div>
               <div className="movie_links mt-3">
                 <a
-                  className="btn border border-2  px-4 border-dark rounded-pill"
+                  className="btn border border-2 shadow px-4 border-dark rounded-pill"
                   href={movie.movie.homepage}
                   target="_blank"
                 >
@@ -105,8 +112,6 @@ function Moviedetails() {
         )}
       </div>
     </div>
-
-
   );
 }
 

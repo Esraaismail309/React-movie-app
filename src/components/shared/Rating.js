@@ -8,8 +8,9 @@ function Rating({ rate }) {
             value={rate / 2}
             size={24}
             activeColor="#ffd700"
+            color="black"
             edit={false}
-            classNames='justify-content-center '
+            classNames='justify-content-center'
         />
     )
 }

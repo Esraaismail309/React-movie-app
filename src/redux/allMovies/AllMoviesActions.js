@@ -4,6 +4,7 @@ import { MOVIES_REQUEST, MOVIES_FAIL, MOVIES_SUCCESS } from './AllMoviesTypes'
 export const fetchMoviesRequest = () => {
     return {
         type: MOVIES_REQUEST,
+
     }
 }
 export const fetchMoviesSuccess = (movies) => {

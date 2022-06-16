@@ -41,7 +41,9 @@ const movieReducer = (state = initialState, action) => {
             }
         case MOVIE_CAST_SUCCESS:
             return {
-                movieCast: action.payload
+                ...state,
+                movieCast: action.payload,
+
             }
         default:
             return state;

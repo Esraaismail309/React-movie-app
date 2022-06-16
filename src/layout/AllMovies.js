@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
+import { Pagination } from "../components/shared/Pagination";
 import { fetchMoviesRequest } from "../redux/allMovies/AllMoviesActions";
-import Movie from "./Movie";
+import Movie from "./movie/Movie";
 function AllMovies() {
   const dispatch = useDispatch();
 
@@ -16,15 +18,18 @@ function AllMovies() {
   return (
     <div className="container mt-3">
       <h1>Popular movies</h1>
-      <div className="row gy-3 text-center">
+      <div className="row gy-3 text-center gx-3">
         {movies.isLoading ? (
           <Loader />
         ) : (
-          movies.movies.results.map((movie) => (<Movie movie={movie} key={movie.id} />
-          ))
+          <>
+            {movies.movies.results.map((movie) => (
+              <Movie movie={movie} key={movie.id} />))}
+            <Pagination />
+          </>
         )}
       </div>
-    </div>
+    </div >
   );
 }
 

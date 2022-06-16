@@ -1,0 +1,13 @@
+.movie_item {
+  transition: all 0.5s;
+}
+.movie_item:hover {
+  background-color: gray;
+  border-radius: 0.25rem;
+}
+.movie_item h3 {
+  transition: all 0.5s;
+}
+.movie_item:hover h3 {
+  color: white;
+}
