@@ -30,7 +30,7 @@ const Moviedetails = () => {
   });
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 pt-5">
       <div className="row ">
         {movie.isLoading ? (
           <Loader />
