@@ -18,8 +18,8 @@ const AllMovies = () => {
   });
 
   return (
-    <div className="container mt-3">
-      <h1>Popular movies</h1>
+    <div className="container mt-5 pt-5">
+      <h1 className="mb-5">Popular movies</h1>
       <div className="row gy-3 text-center gx-3">
         {movies.isLoading ? (
           <Loader />

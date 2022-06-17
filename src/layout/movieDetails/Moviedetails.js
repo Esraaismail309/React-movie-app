@@ -101,7 +101,7 @@ const Moviedetails = () => {
                   Trailer <BsFillPlayFill />
                 </a>
                 <Link
-                  to={`/movie-app/moviedetails/${page}`}
+                  to={`/movie-app/moviedetails/1`}
                   className="btn btn-dark border shadow my-1 border-dark rounded-pill  col-lg-2 col-5"
                 >
                   <FaLongArrowAltLeft /> Back
