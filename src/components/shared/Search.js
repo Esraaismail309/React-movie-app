@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { fetchFilterdMoviesRequest } from "../../redux/searchMovie/SearchActions";
 
 export const Search = () => {
@@ -10,6 +10,7 @@ export const Search = () => {
   const onClickHandler = (e) => {
     e.preventDefault()
     dispatch(fetchFilterdMoviesRequest(1, userInputSearch))
+    setUserInputSearch('')
   }
   return (
     <div>
@@ -22,7 +23,7 @@ export const Search = () => {
           placeholder='search movie ...'
         />
         <button type="submit" className="btn bg-dark mb-2">
-          <Link to={`/filterdmovie/1/${userInputSearch}`}>
+          <Link to={`/movie-app/filterdmovie/1/${userInputSearch}`}>
             <FiSearch className="text-white my-1 " />
           </Link>
         </button>

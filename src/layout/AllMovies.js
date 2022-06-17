@@ -5,6 +5,8 @@ import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import { fetchMoviesRequest } from "../redux/allMovies/AllMoviesActions";
 import Movie from "./movie/Movie";
+
+
 const AllMovies = () => {
   const dispatch = useDispatch();
   const { page } = useParams()
@@ -14,6 +16,7 @@ const AllMovies = () => {
   const movies = useSelector((res) => {
     return res.movies;
   });
+
   return (
     <div className="container mt-3">
       <h1>Popular movies</h1>
@@ -23,15 +26,19 @@ const AllMovies = () => {
         ) : (
           <>
             {movies.movies.results.map((movie) => (
-              <Movie movie={movie} key={movie.id} />))}
-            <div className="d-flex justify-content-between fixed-bottom">
+              <Movie movie={movie} key={movie.id} page={page} />))}
+            <div className="position-relative">
               {page > 1 && (
-                <Link to={`/popularmovies/${+page - 1}`}>
-                  <button className="btn btn-dark border px-4 mx-auto mt-3  shadow border-dark rounded-pill "><FaArrowLeft /> Prev {+page - 1}</button>
-                </Link>)
+                <div className="d-flex justify-content-between ">
+                  <Link to={`/movie-app/popularmovies/${+page - 1}`}>
+                    <button className="btn btn-dark  px-4 mt-3 ms-3 position-fixed bottom-0 start-0 shadow rounded-pill  ">
+                      <FaArrowLeft /> Prev {+page - 1}</button>
+                  </Link>
+                </div>
+              )
               }
-              <Link to={`/popularmovies/${+page + 1}`}>
-                <button className="btn btn-dark border px-4 mx-auto mt-3  shadow border-dark rounded-pill ">next {+page + 1} <FaArrowRight /></button>
+              <Link to={`/movie-app/popularmovies/${+page + 1}`}>
+                <button className="btn btn-dark px-4 mx-auto  position-fixed me-3 bottom-0  end-0 shadow rounded-pill ">next {+page + 1} <FaArrowRight /></button>
               </Link>
             </div>
           </>

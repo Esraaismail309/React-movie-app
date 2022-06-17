@@ -18,7 +18,7 @@ export const WishList = () => {
                         <h3> your wishlist is empty </h3>
                         <h5>Back to movies</h5>
                         <Link
-                            to={"/popularmovies"}
+                            to={"/movie-app/popularmovies"}
                             className="btn btn-dark border px-4 mx-auto mt-3 col-1 shadow border-dark rounded-pill "
                         >
                             <FaLongArrowAltLeft /> Back

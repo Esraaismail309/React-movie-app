@@ -1,9 +1,8 @@
 import React from 'react'
 
-function Loader() {
+const Loader = () => {
     return (
         <div>loader...</div>
     )
 }
-
 export default Loader

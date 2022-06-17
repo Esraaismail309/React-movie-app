@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { SiFacepunch } from 'react-icons/si'
-import { FaLongArrowAltLeft } from "react-icons/fa";
+import { Link, useParams } from 'react-router-dom';
+import { FaLongArrowAltLeft, FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { fetchFilterdMoviesRequest } from './../../redux/searchMovie/SearchActions'
 import Loader from '../../components/Loader';
 import Movie from '../movie/Movie';
-import { Link, useParams, } from 'react-router-dom';
-import { Pagination } from '../../components/shared/Pagination';
+
 
 export const FilterdMovies = () => {
     const { page, query } = useParams()
     const dispatch = useDispatch()
     const data = useSelector((res) => { return res.filterdMovies })
+    const maxPageNum = data.filterdMovies.total_pages
     useEffect(() => {
         dispatch(fetchFilterdMoviesRequest(page, query));
     }, [page, query]);
@@ -23,7 +24,7 @@ export const FilterdMovies = () => {
                         <h2>data not found </h2>
                         <SiFacepunch className='h1 d-block m-auto' />
                         <Link
-                            to={"/popularmovies"}
+                            to={`/movie-app/popularmovies/${page}`}
                             className="btn btn-dark border px-4 mt-3  shadow border-dark rounded-pill "
                         >
                             <FaLongArrowAltLeft /> Back
@@ -33,9 +34,29 @@ export const FilterdMovies = () => {
                         {data?.filterdMovies.results?.map((movie) => (
                             <Movie movie={movie} key={movie.id} />
                         ))}
+                        <div className="d-flex justify-content-between fixed-bottom">
+                            {page > 1 && (
+                                <Link to={`/movie-app/filterdmovie/${+page - 1}/${query}`}>
+                                    <button
+                                        className="btn btn-dark border px-4 mx-auto mt-3  shadow border-dark rounded-pill ">
+                                        <FaArrowLeft /> Prev {+page - 1}
+                                    </button>
+                                </Link>)
+                            }
+                            {/* 11<12-1 */}
+                            {maxPageNum !== +page ? (
+                                <Link to={`/movie-app/filterdmovie/${+page + 1}/${query}`}>
+                                    <button
+                                        className="btn btn-dark border px-4 mx-auto mt-3  shadow border-dark rounded-pill ">
+                                        next {+page + 1} <FaArrowRight />
+                                    </button>
+                                </Link>
+                            ) : null}
+
+                        </div>
                     </div>)
             }
-            <Pagination page={page} query={query} />
+
         </div>
     )
 }

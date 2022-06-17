@@ -1,11 +1,13 @@
-.movie_item {
+.movie_item-body {
   transition: all 0.5s;
 }
-.movie_item:hover {
+.movie_item:hover .movie_item-body {
   background-color: gray;
-  border-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
 }
-.movie_item h3 {
+.movie_item-body h3 {
+  margin-top: 0;
   transition: all 0.5s;
 }
 .movie_item:hover h3 {

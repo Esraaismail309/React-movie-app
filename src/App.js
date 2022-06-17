@@ -1,15 +1,14 @@
-import { Provider } from 'react-redux';
-import store from './redux/store'
 import './App.css';
-import Navbar from './components/shared/Navbar';
-import AllMovies from './layout/AllMovies';
+import { Provider } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
+import store from './redux/store'
 import Moviedetails from './layout/movieDetails/Moviedetails';
-import { Pagination } from './components/shared/Pagination';
+import Navbar from './components/shared/Navbar';
 import { FilterdMovies } from './layout/filterdMovies/FilterdMovies';
+import AllMovies from './layout/AllMovies';
 import { WishList } from './layout/WishList';
 
-function App() {
+const App = () => {
 
 
   return (
@@ -17,13 +16,13 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path='/' element={<AllMovies />} />
-        <Route path='/popularmovies/:page' element={<AllMovies />} />
-        <Route path='/moviedetails' element={<Moviedetails />} >
+        <Route path='/movie-app' exact element={<AllMovies />} />
+        <Route path='/movie-app/popularmovies/:page' element={<AllMovies />} />
+        <Route path='/movie-app/moviedetails' element={<Moviedetails />} >
           <Route path=':id' element={<Moviedetails />} />
         </Route>
-        <Route path='/filterdmovie/:page/:query' element={<FilterdMovies />} />
-        <Route path='/wishlist' element={<WishList />} />
+        <Route path='/movie-app/filterdmovie/:page/:query' element={<FilterdMovies />} />
+        <Route path='/movie-app/wishlist' element={<WishList />} />
       </Routes>
     </Provider>
   );
