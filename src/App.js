@@ -15,8 +15,6 @@ function App() {
   return (
     <Provider store={store}>
       <Navbar />
-      {/* <Pagination /> */}
-      {/* <FilterdMovies /> */}
 
       <Routes>
         <Route path='/' element={<AllMovies />} />
