@@ -48,10 +48,10 @@ const Moviedetails = () => {
             <div className="col-md-6">
               <h1 className="fw-light mt-2">{movie.movie.title}</h1>
               <h6>{movie.movie.tagline}</h6>
-              <div className="d-flex justify-content-between">
+              <div className="d-flex justify-content-between flex-wrap">
                 <div className="col-md-6 d-flex ">
                   <Rating rate={movie.movie.vote_average} />
-                  <p className="mt-2 ms-4 fw-bold">
+                  <p className="mt-2 ms-4 fw-bold ">
                     {movie.movie.vote_average}
                   </p>
                 </div>
@@ -101,7 +101,7 @@ const Moviedetails = () => {
                   Trailer <BsFillPlayFill />
                 </a>
                 <Link
-                  to={`/movie-app/moviedetails/1`}
+                  to={`/movie-app/popularmovies/1`}
                   className="btn btn-dark border shadow my-1 border-dark rounded-pill  col-lg-2 col-5"
                 >
                   <FaLongArrowAltLeft /> Back

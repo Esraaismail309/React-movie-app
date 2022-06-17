@@ -49,7 +49,8 @@ const Movie = (props) => {
                     }</div>
                 <Link to={`/movie-app/moviedetails/${movie.id}`} className='text-decoration-none text-dark'>
                     <img
-                        src={BASE_IMG_URL + movie.poster_path}
+                        // BASE_IMG_URL + movie.poster_path
+                        src={movie.poster_path ? (BASE_IMG_URL + movie.poster_path) : 'https://via.placeholder.com/200x300'}
                         className="w-100 rounded-top shadow"
                         alt={movie.title}
                     />

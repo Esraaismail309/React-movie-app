@@ -14,7 +14,6 @@ const App = () => {
   return (
     <Provider store={store}>
       <Navbar />
-
       <Routes>
         <Route path='/movie-app' exact element={<AllMovies />} />
         <Route path='/movie-app/popularmovies/:page' element={<AllMovies />} />
