@@ -2,8 +2,8 @@ import React from 'react'
 
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/w780/";
 const cast__img = {
-    height: "40px",
-    width: "40px",
+
+    objectFit: 'cover'
 };
 export const Cast = ({ cast }) => {
     return (
@@ -11,7 +11,7 @@ export const Cast = ({ cast }) => {
             <img
                 src={BASE_IMG_URL + cast?.profile_path}
                 alt={cast.name}
-                className="rounded-circle"
+                className="rounded-circle w-75 h-75 obje"
                 style={cast__img}
             />
         </div>

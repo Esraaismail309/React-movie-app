@@ -74,7 +74,7 @@ const Moviedetails = () => {
               <p>{movie.movie.overview}</p>
               <h5>THE CAST</h5>
               <div className="cast__item d-flex flex-wrap my-4 ">
-                {movieCast.cast.slice(0, 8).map((cast) => (
+                {movieCast.cast.slice(0, 7).map((cast) => (
                   <Cast cast={cast} key={cast.id} />
                 ))}
               </div>
