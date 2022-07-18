@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { FormattedMessage } from "react-intl";
 import { Link } from 'react-router-dom'
 import { Search } from './Search'
+import { Context } from '../../locales/Wrapper';
 
 const Navbar = () => {
+    const locale = useContext(Context)
 
-    return (
+    return (<>
+
         <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top py-3">
             <div className="container">
                 <Link to='/movie-app/popularmovies/1' className="navbar-brand fw-bolder" >Movie App</Link>
@@ -14,19 +18,27 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0 ">
                         <li className="nav-item">
-                            <Link to='/movie-app/popularmovies/1' className="nav-link active" aria-current="page" >Popular</Link >
+                            <Link to='/movie-app/popularmovies/1' className="nav-link active" aria-current="page" >
+                                <FormattedMessage id='popular' />
+                            </Link >
                         </li>
                         <li className="nav-item">
-                            <Link to={'/movie-app/wishlist'} className="nav-link" >Wishlist</Link>
+                            <Link to={'/movie-app/wishlist'} className="nav-link" > <FormattedMessage id='wishlist' /></Link>
                         </li>
                         <li>
-                            <Search />
+                            <button className='btn btn-danger mx-2' onClick={(e) => { locale.changeLanguage(e) }} value='ar'>Ar</button>
+                        </li>
+                        <li>
+                            <button className='btn btn-danger mx-2' onClick={(e) => { locale.changeLanguage(e) }} value='en'>En</button>
                         </li>
                     </ul>
 
                 </div>
             </div>
         </nav>
+        <Search />
+
+    </>
     )
 }
 

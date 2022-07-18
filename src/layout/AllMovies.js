@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import { fetchMoviesRequest } from "../redux/allMovies/AllMoviesActions";
+import { FormattedMessage, useIntl } from 'react-intl'
 import Movie from "./movie/Movie";
 
 
 const AllMovies = () => {
+  const intl = useIntl()
   const dispatch = useDispatch();
   const { page } = useParams()
   useEffect(() => {
@@ -19,26 +21,26 @@ const AllMovies = () => {
 
   return (
     <div className="container mt-5 pt-5">
-      <h1 className="mb-5">Popular movies</h1>
+      <h1 className="mb-5"><FormattedMessage id="title" /></h1>
       <div className="row gy-3 text-center gx-3">
         {movies.isLoading ? (
           <Loader />
         ) : (
           <>
-            {movies.movies.results.map((movie) => (
+            {movies.movies.results?.map((movie) => (
               <Movie movie={movie} key={movie.id} page={page} />))}
             <div className="position-relative">
               {page > 1 && (
                 <div className="d-flex justify-content-between ">
                   <Link to={`/movie-app/popularmovies/${+page - 1}`}>
                     <button className="btn btn-dark  px-4 mt-3 ms-3 position-fixed bottom-0 start-0 shadow rounded-pill  ">
-                      <FaArrowLeft /> Prev {+page - 1}</button>
+                      <FaArrowLeft /> {intl.messages.prev} {+page - 1}</button>
                   </Link>
                 </div>
               )
               }
               <Link to={`/movie-app/popularmovies/${+page + 1}`}>
-                <button className="btn btn-dark px-4 mx-auto  position-fixed me-3 bottom-0  end-0 shadow rounded-pill ">next {+page + 1} <FaArrowRight /></button>
+                <button className="btn btn-dark px-4 mx-auto  position-fixed me-3 bottom-0  end-0 shadow rounded-pill ">{intl.messages.next} {+page + 1} <FaArrowRight /></button>
               </Link>
             </div>
           </>

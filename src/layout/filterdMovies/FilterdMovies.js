@@ -4,12 +4,14 @@ import { SiFacepunch } from 'react-icons/si'
 import { Link, useParams } from 'react-router-dom';
 import { FaLongArrowAltLeft, FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { fetchFilterdMoviesRequest } from './../../redux/searchMovie/SearchActions'
+import { FormattedMessage, useIntl } from 'react-intl'
 import Loader from '../../components/Loader';
 import Movie from '../movie/Movie';
 
 
 export const FilterdMovies = () => {
     const { page, query } = useParams()
+    const intl = useIntl()
     const dispatch = useDispatch()
     const data = useSelector((res) => { return res.filterdMovies })
     const maxPageNum = data.filterdMovies.total_pages
@@ -21,13 +23,13 @@ export const FilterdMovies = () => {
             {data?.isLoading ? (<Loader />) :
                 data?.filterdMovies?.results.length === 0 ?
                     (<div className='text-center'>
-                        <h2>data not found </h2>
+                        <h2>{intl.messages.notFound}</h2>
                         <SiFacepunch className='h1 d-block m-auto' />
                         <Link
                             to={`/movie-app/popularmovies/${page}`}
                             className="btn btn-dark border px-4 mt-3  shadow border-dark rounded-pill "
                         >
-                            <FaLongArrowAltLeft /> Back
+                            <FaLongArrowAltLeft /> {intl.messages.back}
                         </Link>
                     </div>) :
                     (<div className='row gx-4 gy-3 '>
@@ -39,7 +41,7 @@ export const FilterdMovies = () => {
                                 <Link to={`/movie-app/filterdmovie/${+page - 1}/${query}`}>
                                     <button
                                         className="btn btn-dark border px-4 mx-auto mt-3  shadow border-dark rounded-pill ">
-                                        <FaArrowLeft /> Prev {+page - 1}
+                                        <FaArrowLeft /> {intl.messages.prev} {+page - 1}
                                     </button>
                                 </Link>)
                             }
@@ -48,7 +50,7 @@ export const FilterdMovies = () => {
                                 <Link to={`/movie-app/filterdmovie/${+page + 1}/${query}`}>
                                     <button
                                         className="btn btn-dark border px-4 mx-auto mt-3  shadow border-dark rounded-pill ">
-                                        next {+page + 1} <FaArrowRight />
+                                        {intl.messages.next} {+page + 1} <FaArrowRight />
                                     </button>
                                 </Link>
                             ) : null}

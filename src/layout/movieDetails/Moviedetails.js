@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RiRadioButtonFill } from "react-icons/ri";
 import { FaLink, FaLongArrowAltLeft, FaImdb } from "react-icons/fa";
 import { BsFillPlayFill } from "react-icons/bs";
+import { useIntl } from 'react-intl'
+
 import {
   fetchMovieCastRequest,
   fetchMovieRequest,
@@ -15,8 +17,8 @@ import { Cast } from "./Cast";
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/w780/";
 
 const Moviedetails = () => {
+  const intl = useIntl()
   const { id, page } = useParams();
-  console.log(page);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchMovieCastRequest(id));
@@ -63,16 +65,16 @@ const Moviedetails = () => {
                   </p>
                 </div>
               </div>
-              <h5>THE GENERS</h5>
+              <h5> {intl.messages.movie.geners} </h5>
               {movie.movie.genres.map((genre) => (
                 <span className="me-2 text-secondary" key={genre.id}>
                   <RiRadioButtonFill className="me-1 " />
                   {genre.name}
                 </span>
               ))}
-              <h5 className="mt-4">THE SYNOPSIS</h5>
+              <h5 className="mt-4"> {intl.messages.movie.synopsis} </h5>
               <p>{movie.movie.overview}</p>
-              <h5>THE CAST</h5>
+              <h5> {intl.messages.movie.cast} </h5>
               <div className="cast__item d-flex flex-wrap my-4 ">
                 {movieCast.cast.slice(0, 7).map((cast) => (
                   <Cast cast={cast} key={cast.id} />
@@ -83,13 +85,15 @@ const Moviedetails = () => {
                   className="btn border border-2  shadow my-1 col-lg-3 border-dark rounded-pill col-5"
                   href={movie.movie.homepage}
                   target="_blank"
+                  rel="noreferrer"
                 >
-                  Website <FaLink />
+                  {intl.messages.movie.website}  <FaLink />
                 </a>
                 <a
                   className="btn border border-2  shadow my-1 border-dark rounded-pill col-lg-3 col-5"
                   href={`https://www.imdb.com/title/${movie.movie.imdb_id}/?ref_=hm_fanfav_tt_i_1_pd_fp1`}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   IMDB <FaImdb />
                 </a>
@@ -97,14 +101,15 @@ const Moviedetails = () => {
                   className="btn border border-2  shadow my-1 border-dark rounded-pill col-lg-3 col-5"
                   href={`https://www.imdb.com/title/${movie.movie?.imdb_id}/?ref_=hm_fanfav_tt_i_1_pd_fp1`}
                   target="_blank"
+                  rel="noreferrer"
                 >
-                  Trailer <BsFillPlayFill />
+                  {intl.messages.movie.trailer} <BsFillPlayFill />
                 </a>
                 <Link
                   to={`/movie-app/popularmovies/1`}
                   className="btn btn-dark border shadow my-1 border-dark rounded-pill  col-lg-2 col-5"
                 >
-                  <FaLongArrowAltLeft /> Back
+                  <FaLongArrowAltLeft /> {intl.messages.back}
                 </Link>
               </div>
             </div>
