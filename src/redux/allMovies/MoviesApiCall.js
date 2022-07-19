@@ -1,14 +1,10 @@
 import axios from "axios"
-
 const axiosInstance = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
 })
 
 
 export function getMovies(page, search) {
-    // const locale = useContext(Context)
-    // console.log(locale);
-    // const xx=useIntl()
     if (search) {
         return axiosInstance.request({
             method: 'GET',

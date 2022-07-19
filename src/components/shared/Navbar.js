@@ -26,10 +26,16 @@ const Navbar = () => {
                             <Link to={'/movie-app/wishlist'} className="nav-link" > <FormattedMessage id='wishlist' /></Link>
                         </li>
                         <li>
-                            <button className='btn btn-danger mx-2' onClick={(e) => { locale.changeLanguage(e) }} value='ar'>Ar</button>
+                            <button className='btn btn-danger mx-2' onClick={(e) => {
+                                locale.changeLanguage(e)
+                                // localStorage.setItem('lang', 'ar')
+                            }} value='ar'>Ar</button>
                         </li>
                         <li>
-                            <button className='btn btn-danger mx-2' onClick={(e) => { locale.changeLanguage(e) }} value='en'>En</button>
+                            <button className='btn btn-danger mx-2' onClick={(e) => {
+                                locale.changeLanguage(e)
+                                // localStorage.setItem('lang', 'en')
+                            }} value='en'>En</button>
                         </li>
                     </ul>
 
