@@ -1,0 +1,21 @@
+{
+  "title": "Poupular movies",
+  "popular": "popular",
+  "wishlist": "wishlist",
+  "search": "Search movie...",
+  "next": "next",
+  "prev": "previous",
+  "wishlistMsg": "Your wishlist is empty",
+  "backToMovies": "back to movies",
+  "notFound": "Data not found",
+  "back": "Back",
+  "backToHome": "Back to home",
+  "movie": {
+    "geners": "THE GENERS",
+    "synopsis": "THE SYNOPSIS",
+    "cast": "THE CAST",
+    "website": "Website",
+    "trailer": "Trailer"
+  },
+  "loader": "Loading ..."
+}
