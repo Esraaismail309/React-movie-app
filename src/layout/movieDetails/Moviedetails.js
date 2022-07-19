@@ -1,38 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { RiRadioButtonFill } from "react-icons/ri";
 import { FaLink, FaLongArrowAltLeft, FaImdb } from "react-icons/fa";
 import { BsFillPlayFill } from "react-icons/bs";
-import {
-  fetchMovieCastRequest,
-  fetchMovieRequest,
-} from "../../redux/movie/MovieAction";
+import { useIntl } from 'react-intl'
 import Loader from "../../components/Loader";
 import Rating from "../../components/shared/Rating";
 import { Cast } from "./Cast";
 import { CallApi } from "../../utilits/CallApi";
+import { useContext } from "react";
+import { Context } from "../../locales/Wrapper";
 
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/w780/";
 
 const Moviedetails = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchMovieCastRequest(id));
-  //   dispatch(fetchMovieRequest(id));
-  // }, []);
+  const intl = useIntl()
+  const locale = useContext(Context)
 
-  // const movie = useSelector((res) => {
-  //   return res.movie;
-  // });
-  // const movieCast = useSelector((res) => {
-  //   return res.movie.movieCast;
-  // });
   const onSuccess = (data) => {
     console.log("Sucess msg", data?.data);
-    // setUsers(data)
-    // setMovies(data?.data.results)
+
   }
   const onError = (error) => {
     console.log("Error msg");
@@ -40,7 +28,7 @@ const Moviedetails = () => {
   const { data: movieDetailsData, isLoading } = CallApi('movie-details',
     {
       method: 'get',
-      url: `https://api.themoviedb.org/3/movie/${id}?api_key=bdd10d2b8f52bc0a5320d5c9d88bd1ff`
+      url: `https://api.themoviedb.org/3/movie/${id}?api_key=bdd10d2b8f52bc0a5320d5c9d88bd1ff&language=${locale.locale}`
     },
     {
       onError,
@@ -50,14 +38,13 @@ const Moviedetails = () => {
   const { data: castMoviedata, isLoading: castMovieLoader } = CallApi('movie-cast',
     {
       method: 'get',
-      url: `https://api.themoviedb.org/3/movie/${id}/credits?api_key=bdd10d2b8f52bc0a5320d5c9d88bd1ff`
+      url: `https://api.themoviedb.org/3/movie/${id}/credits?api_key=bdd10d2b8f52bc0a5320d5c9d88bd1ff&language=${locale.locale}`
     },
     {
       onError,
       onSuccess,
     }
   )
-  console.log(castMoviedata?.data.cast);
 
   return (
     <div className="container mt-5 pt-5">
@@ -92,16 +79,17 @@ const Moviedetails = () => {
                     </p>
                   </div>
                 </div>
-                <h5>THE GENERS</h5>
+                <h5> {intl.messages.movie.geners} </h5>
+
                 {movieDetailsData.data.genres.map((genre) => (
                   <span className="me-2 text-secondary" key={genre.id}>
                     <RiRadioButtonFill className="me-1 " />
                     {genre.name}
                   </span>
                 ))}
-                <h5 className="mt-4">THE SYNOPSIS</h5>
+                <h5 className="mt-4"> {intl.messages.movie.synopsis} </h5>
                 <p>{movieDetailsData.data.overview}</p>
-                <h5>THE CAST</h5>
+                <h5> {intl.messages.movie.cast} </h5>
                 <div className="cast__item d-flex flex-wrap my-4 ">
                   {castMoviedata?.data.cast.slice(0, 7).map((cast) => (
                     <Cast cast={cast} key={cast.id} />
@@ -112,13 +100,17 @@ const Moviedetails = () => {
                     className="btn border border-2  shadow my-1 col-lg-3 border-dark rounded-pill col-5"
                     href={movieDetailsData.data.homepage}
                     target="_blank"
+                    rel="noreferrer"
+
                   >
-                    Website <FaLink />
+                    {intl.messages.movie.website}  <FaLink />
                   </a>
                   <a
                     className="btn border border-2  shadow my-1 border-dark rounded-pill col-lg-3 col-5"
                     href={`https://www.imdb.com/title/${movieDetailsData.data.imdb_id}/?ref_=hm_fanfav_tt_i_1_pd_fp1`}
                     target="_blank"
+                    rel="noreferrer"
+
                   >
                     IMDB <FaImdb />
                   </a>
@@ -126,14 +118,16 @@ const Moviedetails = () => {
                     className="btn border border-2  shadow my-1 border-dark rounded-pill col-lg-3 col-5"
                     href={`https://www.imdb.com/title/${movieDetailsData.data?.imdb_id}/?ref_=hm_fanfav_tt_i_1_pd_fp1`}
                     target="_blank"
+                    rel="noreferrer"
+
                   >
-                    Trailer <BsFillPlayFill />
+                    {intl.messages.movie.trailer} <BsFillPlayFill />
                   </a>
                   <Link
                     to={`/movie-app/popularmovies/1`}
                     className="btn btn-dark border shadow my-1 border-dark rounded-pill  col-lg-2 col-5"
                   >
-                    <FaLongArrowAltLeft /> Back
+                    <FaLongArrowAltLeft /> {intl.messages.back}
                   </Link>
                 </div>
               </div>

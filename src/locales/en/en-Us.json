@@ -17,5 +17,6 @@
     "website": "Website",
     "trailer": "Trailer"
   },
-  "loader": "Loading ..."
+  "loader": "Loading ...",
+  "wishlistTitle": "Your WishList ..."
 }

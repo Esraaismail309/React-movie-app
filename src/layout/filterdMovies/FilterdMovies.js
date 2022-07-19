@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from 'react'
 import { SiFacepunch } from 'react-icons/si'
 import { Link, useParams } from 'react-router-dom';
 import { FaLongArrowAltLeft, FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import { fetchFilterdMoviesRequest } from './../../redux/searchMovie/SearchActions'
+import { FormattedMessage, useIntl } from 'react-intl'
 import Loader from '../../components/Loader';
 import Movie from '../movie/Movie';
 import { CallApi } from '../../utilits/CallApi';
 
 
 export const FilterdMovies = () => {
+    const intl = useIntl()
+
     const { page, query } = useParams()
-    const dispatch = useDispatch()
-    // const data = useSelector((res) => { return res.filterdMovies })
-    // useEffect(() => {
-    //     dispatch(fetchFilterdMoviesRequest(page, query));
-    // }, [page, query]);
-
-
     const [movies, setMovies] = useState([])
 
     const onSuccess = (data) => {
@@ -46,13 +40,13 @@ export const FilterdMovies = () => {
             {isLoading ? (<Loader />) :
                 movies.length === 0 ?
                     (<div className='text-center'>
-                        <h2>data not found </h2>
+                        <h2>{intl.messages.notFound}</h2>
                         <SiFacepunch className='h1 d-block m-auto' />
                         <Link
                             to={`/movie-app/popularmovies/${page}`}
                             className="btn btn-dark border px-4 mt-3  shadow border-dark rounded-pill "
                         >
-                            <FaLongArrowAltLeft /> Back
+                            <FaLongArrowAltLeft />  {intl.messages.back}
                         </Link>
                     </div>) :
                     (<div className='row gx-4 gy-3 '>
@@ -66,7 +60,7 @@ export const FilterdMovies = () => {
                                         <button
                                             onClick={refetch}
                                             className="btn btn-dark  px-4 mt-3 ms-3 position-fixed bottom-0 start-0 shadow rounded-pill">
-                                            <FaArrowLeft /> Prev {+page - 1}
+                                            <FaArrowLeft />  <FaLongArrowAltLeft /> {intl.messages.prev} {+page - 1}
                                         </button>
                                     </Link>
                                 </div>)
@@ -75,7 +69,7 @@ export const FilterdMovies = () => {
                                 <Link to={`/movie-app/filterdmovie/${+page + 1}/${query}`}>
                                     <button onClick={refetch}
                                         className="btn btn-dark border px-4 mx-auto mt-3  shadow border-dark rounded-pill position-fixed me-3 bottom-0 end-0">
-                                        next {+page + 1} <FaArrowRight />
+                                        <FaLongArrowAltLeft /> {intl.messages.next} {+page + 1} <FaArrowRight />
                                     </button>
                                 </Link>
                             ) : null}

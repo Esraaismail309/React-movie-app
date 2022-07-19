@@ -28,7 +28,7 @@ const App = () => {
           <Route path='/movie-app/wishlist' element={<WishList />} />
         </Routes>
       </Provider>
-      <ReactQueryDevtools position='bottom-right' initialIsOpen={false} />
+      {/* <ReactQueryDevtools position='bottom-right' initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }
