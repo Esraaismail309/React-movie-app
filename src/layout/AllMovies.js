@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
@@ -10,19 +10,21 @@ import { Context } from "./../locales/Wrapper";
 
 const AllMovies = () => {
   const locale = useContext(Context)
+  const [lang, setlang] = useState('')
+  useEffect(() => {
+    setlang(locale.locale)
+  }, [locale.locale])
 
   const { page } = useParams()
   const intl = useIntl()
   const [movies, setMovies] = useState([])
   const onSuccess = (data) => {
-
     setMovies(data?.data.results)
   }
   const onError = (error) => {
     console.log("Error msg");
   }
-  const { data, isLoading, isFetching, refetch } = CallApi('allMovies',
-
+  const { data, isLoading, isFetching, refetch } = CallApi(['allMovies', lang, page],
     {
       method: 'get',
       url: `https://api.themoviedb.org/3/movie/popular?api_key=bdd10d2b8f52bc0a5320d5c9d88bd1ff&language=${locale.locale}`,
@@ -35,7 +37,6 @@ const AllMovies = () => {
       onSuccess,
     }
   )
-  console.log();
   return (
     <div className="container mt-5 pt-5">
       <h1 className="mb-5"><FormattedMessage id="title" /></h1>
@@ -44,7 +45,7 @@ const AllMovies = () => {
           <Loader />
         ) : (
           <>
-            {data.data.results.map((movie) => (
+            {data.data?.results.map((movie) => (
               <Movie movie={movie} key={movie.id} page={page} />))}
             <div className="position-relative">
               {page > 1 && (

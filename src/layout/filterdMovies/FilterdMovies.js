@@ -15,8 +15,6 @@ export const FilterdMovies = () => {
     const [movies, setMovies] = useState([])
 
     const onSuccess = (data) => {
-        // console.log("Sucess msg", data);
-        // setUsers(data)
         setMovies(data?.data.results)
     }
     const onError = (error) => {

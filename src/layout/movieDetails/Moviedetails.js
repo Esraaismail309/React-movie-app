@@ -18,32 +18,20 @@ const Moviedetails = () => {
   const intl = useIntl()
   const locale = useContext(Context)
 
-  const onSuccess = (data) => {
-    console.log("Sucess msg", data?.data);
 
-  }
-  const onError = (error) => {
-    console.log("Error msg");
-  }
-  const { data: movieDetailsData, isLoading } = CallApi('movie-details',
+  const { data: movieDetailsData, isLoading } = CallApi(['movie-details', locale.locale],
     {
       method: 'get',
       url: `https://api.themoviedb.org/3/movie/${id}?api_key=bdd10d2b8f52bc0a5320d5c9d88bd1ff&language=${locale.locale}`
     },
-    {
-      onError,
-      onSuccess,
-    }
+
   )
   const { data: castMoviedata, isLoading: castMovieLoader } = CallApi('movie-cast',
     {
       method: 'get',
       url: `https://api.themoviedb.org/3/movie/${id}/credits?api_key=bdd10d2b8f52bc0a5320d5c9d88bd1ff&language=${locale.locale}`
     },
-    {
-      onError,
-      onSuccess,
-    }
+
   )
 
   return (
