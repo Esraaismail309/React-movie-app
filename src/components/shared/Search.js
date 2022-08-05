@@ -1,28 +1,33 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { useIntl } from "react-intl";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { Context } from "../../locales/Wrapper";
 import { fetchFilterdMoviesRequest } from "../../redux/searchMovie/SearchActions";
 
 export const Search = () => {
   const intl = useIntl();
-
+  const locale = useContext(Context)
+  const language = locale.locale
   const [userInputSearch, setUserInputSearch] = useState('')
   const dispatch = useDispatch()
-  const onClickHandler = (e) => {
-    e.preventDefault()
-    dispatch(fetchFilterdMoviesRequest(1, userInputSearch))
+  const onClickHandler = () => {
+    dispatch(fetchFilterdMoviesRequest(1, userInputSearch, language))
 
   }
+  useEffect(() => {
+    onClickHandler()
+  }, [userInputSearch, language])
+
 
   const resetFun = () => {
     setUserInputSearch('')
   }
   return (
-
     <form onSubmit={(e) => {
-      onClickHandler(e)
+      e.preventDefault()
+      onClickHandler()
 
     }}
       className='d-flex mt-5  pt-5 justify-content-center'>

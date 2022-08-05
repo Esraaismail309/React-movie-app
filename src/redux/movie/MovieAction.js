@@ -1,10 +1,11 @@
 
 import { MOVIE_REQUEST, MOVIE_FAIL, MOVIE_SUCCESS, MOVIE_CAST_REQUEST, MOVIE_CAST_SUCCESS } from './MovieType'
 
-export const fetchMovieRequest = (id) => {
+export const fetchMovieRequest = (id, lang) => {
     return {
         type: MOVIE_REQUEST,
-        payload: id
+        payload: id,
+        lang
     }
 }
 export const fetchMovieSuccess = (movie) => {

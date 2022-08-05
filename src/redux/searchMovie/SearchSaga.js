@@ -5,10 +5,10 @@ import { fetchFilterdMoviesSuccess } from "./SearchActions";
 import { getMovies } from "../allMovies/MoviesApiCall";
 
 
-function* handleFilterdMovies({ page, query }) {
+function* handleFilterdMovies({ page, language, query }) {
     try {
         // Call-> promise fun 
-        const filterdData = yield call(getMovies, page, query);
+        const filterdData = yield call(getMovies, page, language, query);
         // destruct response 
         const { data } = filterdData
         yield put(fetchFilterdMoviesSuccess(data));

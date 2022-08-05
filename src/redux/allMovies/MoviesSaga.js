@@ -6,10 +6,10 @@ import { MOVIES_REQUEST } from "./AllMoviesTypes";
 
 
 
-function* handleGetMovies({ payload }) {
+function* handleGetMovies({ payload, lang }) {
     try {
         // Call-> promise fun 
-        const response = yield call(getMovies, payload);
+        const response = yield call(getMovies, payload, lang);
         // destruct response 
         const { data } = response
         yield put(fetchMoviesSuccess(data));

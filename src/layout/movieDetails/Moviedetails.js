@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RiRadioButtonFill } from "react-icons/ri";
@@ -13,17 +13,20 @@ import {
 import Loader from "../../components/Loader";
 import Rating from "../../components/shared/Rating";
 import { Cast } from "./Cast";
+import { Context } from "../../locales/Wrapper";
 
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/w780/";
 
 const Moviedetails = () => {
   const intl = useIntl()
   const { id, page } = useParams();
+  const locale = useContext(Context)
+  const lang = locale.locale
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchMovieCastRequest(id));
-    dispatch(fetchMovieRequest(id));
-  }, []);
+    dispatch(fetchMovieRequest(id, lang));
+  }, [id, lang]);
 
   const movie = useSelector((res) => {
     return res.movie;

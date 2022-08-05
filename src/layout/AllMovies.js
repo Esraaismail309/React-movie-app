@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
@@ -6,16 +6,20 @@ import Loader from "../components/Loader";
 import { fetchMoviesRequest } from "../redux/allMovies/AllMoviesActions";
 import { FormattedMessage, useIntl } from 'react-intl'
 import Movie from "./movie/Movie";
+import { Context } from "../locales/Wrapper";
 
 
 const AllMovies = () => {
   const intl = useIntl()
   const dispatch = useDispatch();
   const { page } = useParams()
+  const locale = useContext(Context)
+  const lang = locale.locale
   useEffect(() => {
-    dispatch(fetchMoviesRequest(page));
-  }, [page]);
+    dispatch(fetchMoviesRequest(page, lang));
+  }, [page, lang]);
   const movies = useSelector((res) => {
+
     return res.movies;
   });
 

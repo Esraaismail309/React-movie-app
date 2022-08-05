@@ -17,7 +17,6 @@ export const Wrapper = (props) => {
             setMessages(Arabic);
         }
     };
-    console.log(locale);
     return (
         <Context.Provider value={{ locale, changeLanguage }}>
             <IntlProvider locale={locale} messages={messages}>

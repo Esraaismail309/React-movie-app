@@ -4,19 +4,22 @@ const axiosInstance = axios.create({
 })
 
 
-export function getMovies(page, search) {
+export function getMovies(page, language, search) {
     if (search) {
         return axiosInstance.request({
             method: 'GET',
-            url: `search/movie?api_key=bdd10d2b8f52bc0a5320d5c9d88bd1ff&page=${page}&query=${search}`,
+            url: `search/movie?api_key=bdd10d2b8f52bc0a5320d5c9d88bd1ff&page=${page}&query=${search}&language=${language}`,
         })
+
     }
     else {
+
         return axiosInstance.request({
             method: 'GET',
             url: `movie/popular?api_key=bdd10d2b8f52bc0a5320d5c9d88bd1ff&`,
             params: {
                 page,
+                language
             },
         })
     }

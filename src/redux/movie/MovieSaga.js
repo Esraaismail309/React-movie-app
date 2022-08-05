@@ -4,11 +4,10 @@ import { put, call, takeLatest, takeEvery } from '@redux-saga/core/effects'
 import { fetchMovieCast, fetchMovieCastSuccess, fetchMovieFail, fetchMovieSuccess } from "./MovieAction";
 import { MOVIE_REQUEST } from "./MovieType";
 
-function getMovie(id) {
-
+function getMovie(id, lang) {
     return movieAxiosInstance.request({
         method: 'GET',
-        url: `movie/${id}?api_key=bdd10d2b8f52bc0a5320d5c9d88bd1ff`
+        url: `movie/${id}?api_key=bdd10d2b8f52bc0a5320d5c9d88bd1ff&language=${lang}`
     })
 }
 function getMovieCast(id) {
@@ -18,11 +17,11 @@ function getMovieCast(id) {
     })
 }
 
-function* handleGetMovie({ payload }) {
+function* handleGetMovie({ payload, lang }) {
 
     try {
         // Call-> promise fun 
-        const movieData = yield call(getMovie, payload);
+        const movieData = yield call(getMovie, payload, lang);
         const castData = yield call(getMovieCast, payload)
         // destruct response
         const { data: movieCastData } = castData
