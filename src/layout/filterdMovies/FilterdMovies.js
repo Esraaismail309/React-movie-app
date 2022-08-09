@@ -4,7 +4,7 @@ import { SiFacepunch } from 'react-icons/si'
 import { Link, useParams } from 'react-router-dom';
 import { FaLongArrowAltLeft, FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { fetchFilterdMoviesRequest } from './../../redux/searchMovie/SearchActions'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useIntl } from 'react-intl'
 import Loader from '../../components/Loader';
 import Movie from '../movie/Movie';
 

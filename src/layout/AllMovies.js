@@ -12,7 +12,12 @@ import { Context } from "../locales/Wrapper";
 const AllMovies = () => {
   const intl = useIntl()
   const dispatch = useDispatch();
-  const { page } = useParams()
+  let { page } = useParams()
+  // page ? : page==page
+  if (page === undefined) {
+    page = 1
+  }
+
   const locale = useContext(Context)
   const lang = locale.locale
   useEffect(() => {
@@ -34,7 +39,7 @@ const AllMovies = () => {
             {movies.movies.results?.map((movie) => (
               <Movie movie={movie} key={movie.id} page={page} />))}
             <div className="position-relative">
-              {page > 1 && (
+              {page >= 1 && (
                 <div className="d-flex justify-content-between ">
                   <Link to={`/movie-app/popularmovies/${+page - 1}`}>
                     <button className="btn btn-dark  px-4 mt-3 ms-3 position-fixed bottom-0 start-0 shadow rounded-pill  ">

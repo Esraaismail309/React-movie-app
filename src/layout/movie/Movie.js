@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Rating from '../../components/shared/Rating'
@@ -10,7 +10,7 @@ import './Movie.css'
 const BASE_IMG_URL = "https://image.tmdb.org/t/p/w780/";
 const Movie = (props) => {
     const dispatch = useDispatch();
-    const { movie, page } = props
+    const { movie } = props
     const wishListmovie = useSelector((state) => state.wishlist.wishList);
 
     const favouriteList = wishListmovie.filter((mov) => {
