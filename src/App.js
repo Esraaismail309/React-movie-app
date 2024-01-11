@@ -16,6 +16,8 @@ const App = () => {
   return (
     <div dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <Provider store={store}>
+    {console.log('test',
+                process.env.REACT_APP_COMPANY_GOOGLE_ANALYTICS_KEY_GA4)]
         <Navbar />
         <Routes>
           <Route path='/' exact element={<AllMovies />} />
